@@ -16,7 +16,7 @@ export class User extends Component {
 
         return (
             <div>
-                <img src={avatar_url} alt={login} />
+                <img className="round-img" style={{width: '200px'}} src={avatar_url} alt={login} />
                 <h1>Login</h1>
                 <a href={html_url}>{login}</a>
             </div>
