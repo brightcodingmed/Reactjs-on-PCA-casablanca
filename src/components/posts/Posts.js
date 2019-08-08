@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 
+import AddPost from './AddPost';
+
 class Posts extends Component {
 
     state = {
@@ -23,10 +25,19 @@ class Posts extends Component {
              .catch((err) => console.log(err))
     }
 
+    addPostToServer = (myPost) => {
+       axios.post('https://jsonplaceholder.typicode.com/posts', myPost)
+            .then(post => console.log(post))
+            .catch(err => console.log(err))
+    }
+
     render() {
         return (
             <div>
-               <table class="table table-hover">
+                
+                <AddPost dataFromPostToPosts={this.addPostToServer}/>
+
+               <table className="table table-hover">
                    <thead>
                        <tr>
                            <th>Id</th>
@@ -37,7 +48,7 @@ class Posts extends Component {
                    </thead>
                    <tbody>
                        {this.state.posts.map((post) => (
-                       <tr>
+                       <tr key={post.id}>
                            <td scope="row">{post.id}</td>
                            <td> <h3>{post.title}</h3> </td>
                            <td>
